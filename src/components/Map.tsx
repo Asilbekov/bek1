@@ -41,7 +41,7 @@ function LocationMarker({ onLocationSelect }: { onLocationSelect?: (lat: number,
 
     return position ? (
         <Marker position={position} icon={icon}>
-            <Popup>Tanlangan joy</Popup>
+            <Popup className="retro-popup">Select Location</Popup>
         </Marker>
     ) : null
 }
@@ -60,11 +60,11 @@ export default function Map({
     }, [])
 
     if (!isMounted) {
-        return <div className="h-96 bg-gray-100 rounded-2xl animate-pulse" />
+        return <div className="h-96 bg-[#02040a] animate-pulse border-2 border-[#333]" />
     }
 
     return (
-        <div className="h-96 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+        <div className="h-96 overflow-hidden shadow-lg border-2 border-[#00f0ff]">
             <MapContainer
                 center={center}
                 zoom={zoom}
@@ -84,25 +84,25 @@ export default function Map({
                             position={[provider.latitude, provider.longitude]}
                             icon={icon}
                         >
-                            <Popup>
-                                <div className="min-w-[200px]">
-                                    <div className="font-semibold text-gray-900">
+                            <Popup className="retro-popup">
+                                <div className="min-w-[200px] p-1 font-mono">
+                                    <div className="font-bold text-[#00f0ff] uppercase">
                                         {provider.name} {provider.surname}
                                     </div>
                                     {provider.address && (
-                                        <p className="text-sm text-gray-500 mt-1">{provider.address}</p>
+                                        <p className="text-xs text-[#e2e8f0] mt-1">{provider.address}</p>
                                     )}
                                     {provider.averageRating && (
                                         <div className="flex items-center gap-1 mt-2">
-                                            <span className="text-yellow-500">★</span>
-                                            <span className="text-sm">{provider.averageRating.toFixed(1)}</span>
+                                            <span className="text-[#ffe600]">★</span>
+                                            <span className="text-sm text-[#ffe600] font-bold">{provider.averageRating.toFixed(1)}</span>
                                         </div>
                                     )}
                                     <Link
                                         href={`/profile/${provider.id}`}
-                                        className="block mt-3 text-center py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                                        className="block mt-3 text-center py-2 bg-[#00f0ff] text-black text-xs font-bold uppercase hovering-glitch border-2 border-black shadow-[2px_2px_0_rgba(0,0,0,0.5)]"
                                     >
-                                        Profilni ko'rish
+                                        View Profile
                                     </Link>
                                 </div>
                             </Popup>

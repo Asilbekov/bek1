@@ -16,24 +16,24 @@ interface CategoryCardProps {
 }
 
 const categoryIcons: Record<string, { icon: LucideIcon; gradient: string }> = {
-    plumber: { icon: Wrench, gradient: 'from-blue-500 to-cyan-400' },
-    electrician: { icon: Zap, gradient: 'from-yellow-500 to-orange-400' },
-    barber: { icon: Scissors, gradient: 'from-purple-500 to-pink-400' },
-    chef: { icon: ChefHat, gradient: 'from-red-500 to-orange-400' },
-    cleaner: { icon: Sparkles, gradient: 'from-green-500 to-teal-400' },
-    driver: { icon: Car, gradient: 'from-gray-600 to-gray-500' },
-    teacher: { icon: GraduationCap, gradient: 'from-indigo-500 to-blue-400' },
-    repairman: { icon: Hammer, gradient: 'from-amber-600 to-yellow-500' },
-    painter: { icon: Paintbrush, gradient: 'from-pink-500 to-rose-400' },
-    carpenter: { icon: TreePine, gradient: 'from-amber-700 to-amber-500' },
-    tailor: { icon: Shirt, gradient: 'from-violet-500 to-purple-400' },
-    photographer: { icon: Camera, gradient: 'from-slate-600 to-slate-500' },
-    hotel: { icon: Building2, gradient: 'from-emerald-600 to-teal-500' },
-    restaurant: { icon: UtensilsCrossed, gradient: 'from-orange-500 to-red-400' },
-    beauty: { icon: Heart, gradient: 'from-pink-400 to-rose-300' },
-    fitness: { icon: Dumbbell, gradient: 'from-green-600 to-emerald-500' },
-    courier: { icon: Truck, gradient: 'from-blue-600 to-indigo-500' },
-    other: { icon: MoreHorizontal, gradient: 'from-gray-500 to-gray-400' },
+    plumber: { icon: Wrench, gradient: 'text-[#00f0ff] border-[#00f0ff]' },
+    electrician: { icon: Zap, gradient: 'text-[#ffe600] border-[#ffe600]' },
+    barber: { icon: Scissors, gradient: 'text-[#bd00ff] border-[#bd00ff]' },
+    chef: { icon: ChefHat, gradient: 'text-[#ff0055] border-[#ff0055]' },
+    cleaner: { icon: Sparkles, gradient: 'text-[#00ff66] border-[#00ff66]' },
+    driver: { icon: Car, gradient: 'text-[#e2e8f0] border-[#e2e8f0]' },
+    teacher: { icon: GraduationCap, gradient: 'text-[#bd00ff] border-[#bd00ff]' },
+    repairman: { icon: Hammer, gradient: 'text-[#ffe600] border-[#ffe600]' },
+    painter: { icon: Paintbrush, gradient: 'text-[#ff0055] border-[#ff0055]' },
+    carpenter: { icon: TreePine, gradient: 'text-[#ffe600] border-[#ffe600]' },
+    tailor: { icon: Shirt, gradient: 'text-[#bd00ff] border-[#bd00ff]' },
+    photographer: { icon: Camera, gradient: 'text-[#e2e8f0] border-[#e2e8f0]' },
+    hotel: { icon: Building2, gradient: 'text-[#00ff66] border-[#00ff66]' },
+    restaurant: { icon: UtensilsCrossed, gradient: 'text-[#ff0055] border-[#ff0055]' },
+    beauty: { icon: Heart, gradient: 'text-[#ff0055] border-[#ff0055]' },
+    fitness: { icon: Dumbbell, gradient: 'text-[#00ff66] border-[#00ff66]' },
+    courier: { icon: Truck, gradient: 'text-[#00f0ff] border-[#00f0ff]' },
+    other: { icon: MoreHorizontal, gradient: 'text-[#e2e8f0] border-[#e2e8f0]' },
 }
 
 function CategoryCard({ categoryKey, icon: Icon, gradient }: CategoryCardProps) {
@@ -42,13 +42,12 @@ function CategoryCard({ categoryKey, icon: Icon, gradient }: CategoryCardProps) 
     return (
         <Link
             href={`/search?category=${categoryKey}`}
-            className="group relative overflow-hidden rounded-2xl p-6 bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group card flex flex-col items-center justify-center p-6 hover:bg-[#1a1a2e] transition-all"
         >
-            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 transition-opacity`} />
-            <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                <Icon className="text-white" size={28} />
+            <div className={`w-16 h-16 border-2 ${gradient} bg-black flex items-center justify-center mb-4 shadow-[4px_4px_0_rgba(255,255,255,0.2)] group-hover:shadow-[4px_4px_0_currentColor] group-hover:translate-x-[-2px] group-hover:translate-y-[-2px] transition-all`}>
+                <Icon className={gradient.split(' ')[0]} size={32} />
             </div>
-            <h3 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+            <h3 className={`font-bold text-center uppercase tracking-wider text-sm ${gradient.split(' ')[0]} group-hover:text-white transition-colors`}>
                 {t(`categories.${categoryKey}`)}
             </h3>
         </Link>
