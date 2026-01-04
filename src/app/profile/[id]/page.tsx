@@ -160,7 +160,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 {profile.avatar ? (
                                     <img
                                         src={profile.avatar}
-                                        alt={profile.name}
+                                        alt={profile.name || ''}
                                         className="w-full h-full rounded-xl object-cover"
                                     />
                                 ) : (
