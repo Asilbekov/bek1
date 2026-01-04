@@ -52,7 +52,7 @@ export default function RegisterPage() {
 
         setLoading(true)
 
-        const { error } = await signUp(formData.email, formData.password, {
+        const { data, error } = await signUp(formData.email, formData.password, {
             name: formData.name,
             surname: formData.surname,
             phone: formData.phone,
@@ -62,6 +62,8 @@ export default function RegisterPage() {
         if (error) {
             setError(error)
             setLoading(false)
+        } else if (data?.session) {
+            router.push('/')
         } else {
             router.push('/auth/login?registered=true')
         }
