@@ -28,23 +28,22 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
     return (
         <Link
             href={`/profile/${provider.id}`}
-            className="group card block hover:z-10"
+            className="group block hover:z-10 bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-[#7BC5CC]/50 transition-all duration-300 hover:shadow-2xl hover:scale-105"
         >
             {/* Avatar Section */}
-            <div className="relative h-48 bg-[#02040a] border-b-2 border-[#00f0ff] p-2">
-                {/* 4bit Grid Background for avatar area */}
-                <div className="absolute inset-0 opacity-20 bg-[linear-gradient(45deg,#00f0ff_25%,transparent_25%,transparent_75%,#00f0ff_75%,#00f0ff),linear-gradient(45deg,#00f0ff_25%,transparent_25%,transparent_75%,#00f0ff_75%,#00f0ff)] bg-[length:20px_20px] bg-[position:0_0,10px_10px]" />
+            <div className="relative h-48 bg-gradient-to-br from-[#4A2C1C] to-[#1A3A52] p-2">
+                {/* Subtle pattern background for avatar area */}
+                <div className="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#7BC5CC_25%,transparent_25%,transparent_75%,#7BC5CC_75%,#7BC5CC),linear-gradient(45deg,#7BC5CC_25%,transparent_25%,transparent_75%,#7BC5CC_75%,#7BC5CC)] bg-[length:30px_30px] bg-[position:0_0,15px_15px]" />
 
                 {provider.avatar ? (
                     <img
                         src={provider.avatar}
                         alt={`${provider.name} ${provider.surname}`}
-                        className="w-full h-full object-cover border-2 border-[#333] group-hover:border-[#bd00ff] transition-colors"
-                        style={{ imageRendering: 'pixelated' }}
+                        className="w-full h-full object-cover rounded-xl group-hover:ring-2 group-hover:ring-[#7BC5CC] transition-all duration-300"
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center relative z-10">
-                        <div className="w-24 h-24 border-2 border-[#00f0ff] bg-[#000] flex items-center justify-center text-[#00f0ff] text-4xl font-bold shadow-[4px_4px_0_#bd00ff]">
+                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#C89E7C] to-[#7BC5CC] flex items-center justify-center text-white text-4xl font-bold shadow-xl font-[family-name:var(--font-playfair)]">
                             {provider.name?.[0]?.toUpperCase()}
                         </div>
                     </div>
@@ -52,30 +51,30 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
 
                 {/* Price Badge */}
                 {minPrice && minPrice !== Infinity && (
-                    <div className="absolute bottom-3 right-3 px-3 py-1 bg-[#00f0ff] text-black border-2 border-black text-xs font-bold shadow-[2px_2px_0_black] z-20">
+                    <div className="absolute bottom-3 right-3 px-4 py-2 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white rounded-full text-xs font-semibold shadow-lg z-20 font-[family-name:var(--font-montserrat)]">
                         {t('service.priceFrom')} {minPrice.toLocaleString()} {t('service.sum')}
                     </div>
                 )}
             </div>
 
             {/* Content */}
-            <div className="pt-4">
-                <h3 className="font-bold text-lg text-[#00f0ff] uppercase tracking-wider truncate mb-1">
+            <div className="p-4 bg-gradient-to-b from-[#2C1810]/50 to-[#1A3A52]/50">
+                <h3 className="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6D3] to-[#7BC5CC] tracking-wide truncate mb-1 font-[family-name:var(--font-playfair)]">
                     {provider.name} {provider.surname}
                 </h3>
 
                 {/* Rating */}
                 <div className="flex items-center gap-2 mb-3">
                     <StarRating rating={provider.averageRating ?? 0} size="sm" />
-                    <span className="text-xs text-[#bd00ff] font-mono">
-                        [{provider.reviewCount ?? 0} REVIEWS]
+                    <span className="text-xs text-[#B8D8DB] font-[family-name:var(--font-montserrat)]">
+                        [{provider.reviewCount ?? 0} reviews]
                     </span>
                 </div>
 
                 {/* Location */}
                 {provider.address && (
-                    <div className="flex items-center gap-2 text-sm text-[#e2e8f0] font-mono mb-3">
-                        <MapPin size={14} className="text-[#ff0055]" />
+                    <div className="flex items-center gap-2 text-sm text-[#E8D5C4] mb-3 font-[family-name:var(--font-inter)]">
+                        <MapPin size={14} className="text-[#4A9B9F]" />
                         <span className="truncate">{provider.address}</span>
                     </div>
                 )}
@@ -86,7 +85,7 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
                         {provider.services.slice(0, 3).map((service, i) => (
                             <span
                                 key={i}
-                                className="px-2 py-0.5 bg-[#1a1a2e] border border-[#333] text-[#00ff66] text-[10px] uppercase tracking-wider hover:border-[#00ff66] transition-colors"
+                                className="px-3 py-1 bg-white/5 backdrop-blur-sm border border-[#7BC5CC]/30 text-[#7BC5CC] text-[10px] rounded-full tracking-wide hover:border-[#C89E7C]/50 hover:text-[#C89E7C] transition-colors duration-300 font-[family-name:var(--font-montserrat)]"
                             >
                                 {t(`categories.${service.category_id}`)}
                             </span>

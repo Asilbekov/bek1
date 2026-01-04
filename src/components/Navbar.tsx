@@ -16,15 +16,15 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="sticky top-0 z-50 bg-[#050510]/90 backdrop-blur-md border-b-2 border-[#00f0ff] shadow-[0_4px_0_rgba(0,0,0,0.5)]">
+        <nav className="sticky top-0 z-50 bg-gradient-to-r from-[#2C1810]/95 via-[#1A3A52]/95 to-[#2C1810]/95 backdrop-blur-md border-b border-white/10 shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-12 h-12 bg-[#00f0ff] flex items-center justify-center border-2 border-black shadow-[4px_4px_0_#bd00ff] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
-                            <span className="text-black font-bold text-2xl font-mono">B</span>
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#C89E7C] to-[#7BC5CC] rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <span className="text-white font-bold text-2xl font-[family-name:var(--font-playfair)]">B</span>
                         </div>
-                        <span className="text-2xl font-bold text-[#00f0ff] uppercase tracking-widest drop-shadow-[2px_2px_0_#bd00ff]">
+                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] tracking-wide font-[family-name:var(--font-playfair)]">
                             Bek.uz
                         </span>
                     </Link>
@@ -33,13 +33,13 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center gap-8">
                         <Link
                             href="/"
-                            className="text-[#e2e8f0] hover:text-[#00f0ff] transition-colors font-medium uppercase tracking-wider text-sm hover:underline decoration-2 underline-offset-4"
+                            className="text-[#E8D5C4] hover:text-[#7BC5CC] transition-colors duration-300 font-medium tracking-wide text-sm font-[family-name:var(--font-montserrat)]"
                         >
                             {t('nav.home')}
                         </Link>
                         <Link
                             href="/search"
-                            className="text-[#e2e8f0] hover:text-[#00f0ff] transition-colors font-medium flex items-center gap-2 uppercase tracking-wider text-sm"
+                            className="text-[#E8D5C4] hover:text-[#7BC5CC] transition-colors duration-300 font-medium flex items-center gap-2 tracking-wide text-sm font-[family-name:var(--font-montserrat)]"
                         >
                             <Search size={18} />
                             {t('nav.search')}
@@ -47,7 +47,7 @@ export default function Navbar() {
                         {user && (
                             <Link
                                 href="/orders"
-                                className="text-[#e2e8f0] hover:text-[#00f0ff] transition-colors font-medium flex items-center gap-2 uppercase tracking-wider text-sm"
+                                className="text-[#E8D5C4] hover:text-[#7BC5CC] transition-colors duration-300 font-medium flex items-center gap-2 tracking-wide text-sm font-[family-name:var(--font-montserrat)]"
                             >
                                 <ShoppingBag size={18} />
                                 {t('nav.orders')}
@@ -60,7 +60,7 @@ export default function Navbar() {
                         {/* Language Toggle */}
                         <button
                             onClick={toggleLanguage}
-                            className="flex items-center gap-2 px-3 py-1 bg-black border-2 border-[#333] hover:border-[#00f0ff] text-[#00f0ff] transition-all text-xs font-bold uppercase tracking-widest shadow-[2px_2px_0_#333] hover:shadow-[2px_2px_0_#00f0ff]"
+                            className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-[#7BC5CC]/30 hover:border-[#7BC5CC] text-[#7BC5CC] rounded-lg transition-all duration-300 text-xs font-semibold tracking-wider shadow-lg hover:shadow-xl font-[family-name:var(--font-montserrat)]"
                         >
                             <Globe size={14} />
                             {language.toUpperCase()}
@@ -70,14 +70,14 @@ export default function Navbar() {
                             <div className="flex items-center gap-4">
                                 <Link
                                     href={`/profile/${user.id}`}
-                                    className="flex items-center gap-2 px-4 py-2 bg-[#1a1a2e] border-2 border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all shadow-[4px_4px_0_#bd00ff] hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+                                    className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-[#7BC5CC]/30 text-[#7BC5CC] hover:bg-gradient-to-r hover:from-[#C89E7C] hover:to-[#7BC5CC] hover:text-white hover:border-transparent rounded-lg transition-all duration-300 shadow-lg font-[family-name:var(--font-montserrat)]"
                                 >
                                     <User size={18} />
-                                    <span className="font-bold uppercase text-sm">{user.name}</span>
+                                    <span className="font-semibold text-sm">{user.name}</span>
                                 </Link>
                                 <button
                                     onClick={signOut}
-                                    className="p-2 border-2 border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055] hover:text-white transition-all shadow-[2px_2px_0_rgba(0,0,0,0.5)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+                                    className="p-2 border border-[#C89E7C]/50 text-[#C89E7C] hover:bg-[#C89E7C] hover:text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
                                 >
                                     <LogOut size={18} />
                                 </button>
@@ -86,13 +86,13 @@ export default function Navbar() {
                             <div className="flex items-center gap-4">
                                 <Link
                                     href="/auth/login"
-                                    className="px-6 py-2 text-[#e2e8f0] hover:text-[#00f0ff] font-bold uppercase text-sm tracking-wider border-2 border-transparent hover:border-[#00f0ff] transition-all"
+                                    className="px-6 py-2 text-[#E8D5C4] hover:text-[#7BC5CC] font-semibold text-sm tracking-wide transition-all duration-300 font-[family-name:var(--font-montserrat)]"
                                 >
                                     {t('nav.login')}
                                 </Link>
                                 <Link
                                     href="/auth/register"
-                                    className="px-6 py-2 bg-[#00f0ff] text-black border-2 border-[#00f0ff] font-bold uppercase text-sm tracking-wider hover:bg-transparent hover:text-[#00f0ff] transition-all shadow-[4px_4px_0_#bd00ff] hover:shadow-[4px_4px_0_#00f0ff] hover:-translate-y-1"
+                                    className="px-6 py-2 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white rounded-lg font-semibold text-sm tracking-wide hover:shadow-xl transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
                                 >
                                     {t('nav.register')}
                                 </Link>
@@ -103,7 +103,7 @@ export default function Navbar() {
                     {/* Mobile menu button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 text-[#00f0ff] border-2 border-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-colors"
+                        className="md:hidden p-2 text-[#7BC5CC] border border-[#7BC5CC]/30 hover:bg-[#7BC5CC]/10 rounded-lg transition-all duration-300"
                     >
                         {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
