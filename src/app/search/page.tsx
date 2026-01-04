@@ -244,7 +244,13 @@ function SearchContent() {
                 {showMap && (
                     <div className="mb-6 animate-fade-in">
                         <MapComponent
-                            providers={providers.filter(p => p.latitude && p.longitude)}
+                            providers={providers
+                                .filter(p => p.latitude && p.longitude)
+                                .map(p => ({
+                                    ...p,
+                                    created_at: new Date(p.created_at),
+                                    updated_at: new Date()
+                                })) as any}
                         />
                     </div>
                 )}
