@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useLanguage } from '@/lib/LanguageContext'
 import { useAuth } from '@/lib/AuthContext'
@@ -12,21 +12,36 @@ export default function LoginPage() {
     const { signIn } = useAuth()
     const router = useRouter()
 
+    const searchParams = useSearchParams()
+    const registered = searchParams.get('registered')
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+
+    useEffect(() => {
+        if (registered === 'true') {
+            setSuccess('Ro\'yxatdan o\'tish muvaffaqiyatli yakunlandi! Iltimos, akkauntingizni faollashtirish uchun emailingizni tekshiring (Spam papkasini ham).')
+        }
+    }, [registered])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
+        setSuccess('')
         setLoading(true)
 
         const { error } = await signIn(email, password)
 
         if (error) {
-            setError(error)
+            if (error.includes('Email not confirmed')) {
+                setError('Email tasdiqlanmagan. Iltimos, emailingizga yuborilgan havolani bosing.')
+            } else {
+                setError(error)
+            }
             setLoading(false)
         } else {
             router.push('/')
@@ -67,6 +82,13 @@ export default function LoginPage() {
                     <p className="text-gray-500 text-center mb-8">
                         Bek.uz platformasiga xush kelibsiz
                     </p>
+
+                    {/* Success message */}
+                    {success && (
+                        <div className="mb-6 p-4 bg-green-50 border border-green-100 rounded-xl text-green-600 text-sm">
+                            {success}
+                        </div>
+                    )}
 
                     {/* Error message */}
                     {error && (
