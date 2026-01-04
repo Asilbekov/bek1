@@ -60,11 +60,11 @@ export default function Map({
     }, [])
 
     if (!isMounted) {
-        return <div className="h-96 bg-gradient-to-br from-[#2C1810] to-[#1A3A52] animate-pulse rounded-2xl border border-white/10" />
+        return <div className="h-96 bg-[#F5E6D3]/20 animate-pulse rounded-2xl" />
     }
 
     return (
-        <div className="h-96 overflow-hidden shadow-2xl rounded-2xl border border-[#7BC5CC]/30">
+        <div className="h-96 overflow-hidden shadow-xl rounded-2xl border border-[#F5E6D3]">
             <MapContainer
                 center={center}
                 zoom={zoom}
@@ -84,23 +84,23 @@ export default function Map({
                             position={[provider.latitude, provider.longitude]}
                             icon={icon}
                         >
-                            <Popup className="retro-popup">
-                                <div className="min-w-[200px] p-1 font-[family-name:var(--font-inter)]">
-                                    <div className="font-bold text-[#4A9B9F] font-[family-name:var(--font-playfair)]">
+                            <Popup className="elegant-popup">
+                                <div className="min-w-[200px] p-1 font-serif">
+                                    <div className="font-bold text-[#2C1810]">
                                         {provider.name} {provider.surname}
                                     </div>
                                     {provider.address && (
-                                        <p className="text-xs text-[#B8D8DB] mt-1">{provider.address}</p>
+                                        <p className="text-xs text-[#3A3A3A]/70 mt-1 font-sans">{provider.address}</p>
                                     )}
                                     {provider.averageRating && (
                                         <div className="flex items-center gap-1 mt-2">
                                             <span className="text-[#C89E7C]">★</span>
-                                            <span className="text-sm text-[#C89E7C] font-semibold">{provider.averageRating.toFixed(1)}</span>
+                                            <span className="text-sm text-[#2C1810] font-bold font-sans">{provider.averageRating.toFixed(1)}</span>
                                         </div>
                                     )}
                                     <Link
                                         href={`/profile/${provider.id}`}
-                                        className="block mt-3 text-center py-2 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white text-xs font-semibold rounded-lg hover:shadow-lg transition-all duration-300 font-[family-name:var(--font-montserrat)]"
+                                        className="block mt-3 text-center py-2 bg-[#2C1810] text-white text-xs font-bold rounded-md hover:bg-[#4A2C1C] transition-colors font-sans"
                                     >
                                         View Profile
                                     </Link>

@@ -41,8 +41,8 @@ export default function StarRating({
                     <Star
                         size={sizes[size]}
                         className={`${i < rating
-                            ? 'fill-[#C89E7C] text-[#C89E7C] drop-shadow-[0_0_4px_rgba(200,158,124,0.5)]'
-                            : 'fill-[#3A3A3A] text-[#3A3A3A]'
+                            ? 'fill-[#C89E7C] text-[#C89E7C] drop-shadow-[0_0_2px_rgba(200,158,124,0.4)]'
+                            : 'fill-[#F5E6D3] text-[#F5E6D3]'
                             }`}
                     />
                 </button>

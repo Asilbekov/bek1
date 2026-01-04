@@ -12,42 +12,42 @@ import {
 interface CategoryCardProps {
     categoryKey: string
     icon: LucideIcon
-    gradient: string
+    colorClass: string
 }
 
-const categoryIcons: Record<string, { icon: LucideIcon; gradient: string }> = {
-    plumber: { icon: Wrench, gradient: 'text-[#7BC5CC] border-[#7BC5CC]/30' },
-    electrician: { icon: Zap, gradient: 'text-[#C89E7C] border-[#C89E7C]/30' },
-    barber: { icon: Scissors, gradient: 'text-[#4A2C1C] border-[#4A2C1C]/30' },
-    chef: { icon: ChefHat, gradient: 'text-[#C89E7C] border-[#C89E7C]/30' },
-    cleaner: { icon: Sparkles, gradient: 'text-[#4A9B9F] border-[#4A9B9F]/30' },
-    driver: { icon: Car, gradient: 'text-[#B8D8DB] border-[#B8D8DB]/30' },
-    teacher: { icon: GraduationCap, gradient: 'text-[#1A3A52] border-[#1A3A52]/30' },
-    repairman: { icon: Hammer, gradient: 'text-[#C89E7C] border-[#C89E7C]/30' },
-    painter: { icon: Paintbrush, gradient: 'text-[#7BC5CC] border-[#7BC5CC]/30' },
-    carpenter: { icon: TreePine, gradient: 'text-[#4A2C1C] border-[#4A2C1C]/30' },
-    tailor: { icon: Shirt, gradient: 'text-[#1A3A52] border-[#1A3A52]/30' },
-    photographer: { icon: Camera, gradient: 'text-[#B8D8DB] border-[#B8D8DB]/30' },
-    hotel: { icon: Building2, gradient: 'text-[#4A9B9F] border-[#4A9B9F]/30' },
-    restaurant: { icon: UtensilsCrossed, gradient: 'text-[#C89E7C] border-[#C89E7C]/30' },
-    beauty: { icon: Heart, gradient: 'text-[#C89E7C] border-[#C89E7C]/30' },
-    fitness: { icon: Dumbbell, gradient: 'text-[#4A9B9F] border-[#4A9B9F]/30' },
-    courier: { icon: Truck, gradient: 'text-[#7BC5CC] border-[#7BC5CC]/30' },
-    other: { icon: MoreHorizontal, gradient: 'text-[#B8D8DB] border-[#B8D8DB]/30' },
+const categoryIcons: Record<string, { icon: LucideIcon; colorClass: string }> = {
+    plumber: { icon: Wrench, colorClass: 'text-[#4A9B9F] bg-[#4A9B9F]/10' },
+    electrician: { icon: Zap, colorClass: 'text-[#C89E7C] bg-[#C89E7C]/10' },
+    barber: { icon: Scissors, colorClass: 'text-[#2C1810] bg-[#2C1810]/10' },
+    chef: { icon: ChefHat, colorClass: 'text-[#4A2C1C] bg-[#4A2C1C]/10' },
+    cleaner: { icon: Sparkles, colorClass: 'text-[#7BC5CC] bg-[#7BC5CC]/10' },
+    driver: { icon: Car, colorClass: 'text-[#3A3A3A] bg-[#3A3A3A]/10' },
+    teacher: { icon: GraduationCap, colorClass: 'text-[#4A9B9F] bg-[#4A9B9F]/10' },
+    repairman: { icon: Hammer, colorClass: 'text-[#C89E7C] bg-[#C89E7C]/10' },
+    painter: { icon: Paintbrush, colorClass: 'text-[#7BC5CC] bg-[#7BC5CC]/10' },
+    carpenter: { icon: TreePine, colorClass: 'text-[#2C1810] bg-[#2C1810]/10' },
+    tailor: { icon: Shirt, colorClass: 'text-[#4A2C1C] bg-[#4A2C1C]/10' },
+    photographer: { icon: Camera, colorClass: 'text-[#3A3A3A] bg-[#3A3A3A]/10' },
+    hotel: { icon: Building2, colorClass: 'text-[#4A9B9F] bg-[#4A9B9F]/10' },
+    restaurant: { icon: UtensilsCrossed, colorClass: 'text-[#C89E7C] bg-[#C89E7C]/10' },
+    beauty: { icon: Heart, colorClass: 'text-[#FF8FAB] bg-[#FF8FAB]/10' },
+    fitness: { icon: Dumbbell, colorClass: 'text-[#7BC5CC] bg-[#7BC5CC]/10' },
+    courier: { icon: Truck, colorClass: 'text-[#4A2C1C] bg-[#4A2C1C]/10' },
+    other: { icon: MoreHorizontal, colorClass: 'text-[#9E9E9E] bg-[#9E9E9E]/10' },
 }
 
-function CategoryCard({ categoryKey, icon: Icon, gradient }: CategoryCardProps) {
+function CategoryCard({ categoryKey, icon: Icon, colorClass }: CategoryCardProps) {
     const { t } = useLanguage()
 
     return (
         <Link
             href={`/search?category=${categoryKey}`}
-            className="group flex flex-col items-center justify-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-[#7BC5CC]/50 hover:bg-white/10 transition-all duration-300 hover:shadow-xl hover:scale-105"
+            className="group flex flex-col items-center justify-center p-6 bg-white rounded-2xl border border-[#F5E6D3] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
         >
-            <div className={`w-16 h-16 rounded-full border bg-gradient-to-br from-[#2C1810]/50 to-[#1A3A52]/50 flex items-center justify-center mb-4 shadow-lg ${gradient} group-hover:scale-110 transition-all duration-300`}>
-                <Icon className={gradient.split(' ')[0]} size={32} />
+            <div className={`w-14 h-14 rounded-xl ${colorClass} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                <Icon size={28} />
             </div>
-            <h3 className={`font-semibold text-center tracking-wide text-sm ${gradient.split(' ')[0]} group-hover:text-white transition-colors duration-300 font-[family-name:var(--font-montserrat)]`}>
+            <h3 className="font-serif font-medium text-center text-[#2C1810] text-sm group-hover:text-[#C89E7C] transition-colors">
                 {t(`categories.${categoryKey}`)}
             </h3>
         </Link>
@@ -59,12 +59,12 @@ export default function CategoryGrid() {
 
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {categories.map(([key, { icon, gradient }]) => (
+            {categories.map(([key, { icon, colorClass }]) => (
                 <CategoryCard
                     key={key}
                     categoryKey={key}
                     icon={icon}
-                    gradient={gradient}
+                    colorClass={colorClass}
                 />
             ))}
         </div>

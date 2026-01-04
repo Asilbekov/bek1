@@ -16,15 +16,15 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="sticky top-0 z-50 bg-gradient-to-r from-[#2C1810]/95 via-[#1A3A52]/95 to-[#2C1810]/95 backdrop-blur-md border-b border-white/10 shadow-2xl">
+        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-[#F5E6D3] shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#C89E7C] to-[#7BC5CC] rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                            <span className="text-white font-bold text-2xl font-[family-name:var(--font-playfair)]">B</span>
+                        <div className="w-10 h-10 bg-[#2C1810] flex items-center justify-center rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+                            <span className="text-[#C89E7C] font-serif font-bold text-2xl">B</span>
                         </div>
-                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] tracking-wide font-[family-name:var(--font-playfair)]">
+                        <span className="text-2xl font-serif font-bold text-[#2C1810] tracking-tight group-hover:text-[#4A2C1C] transition-colors">
                             Bek.uz
                         </span>
                     </Link>
@@ -33,23 +33,23 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center gap-8">
                         <Link
                             href="/"
-                            className="text-[#E8D5C4] hover:text-[#7BC5CC] transition-colors duration-300 font-medium tracking-wide text-sm font-[family-name:var(--font-montserrat)]"
+                            className="text-[#3A3A3A] hover:text-[#4A9B9F] transition-colors font-medium text-sm hover:underline decoration-2 underline-offset-4 decoration-[#C89E7C]"
                         >
                             {t('nav.home')}
                         </Link>
                         <Link
                             href="/search"
-                            className="text-[#E8D5C4] hover:text-[#7BC5CC] transition-colors duration-300 font-medium flex items-center gap-2 tracking-wide text-sm font-[family-name:var(--font-montserrat)]"
+                            className="text-[#3A3A3A] hover:text-[#4A9B9F] transition-colors font-medium flex items-center gap-2 text-sm group"
                         >
-                            <Search size={18} />
+                            <Search size={18} className="text-[#9E9E9E] group-hover:text-[#4A9B9F] transition-colors" />
                             {t('nav.search')}
                         </Link>
                         {user && (
                             <Link
                                 href="/orders"
-                                className="text-[#E8D5C4] hover:text-[#7BC5CC] transition-colors duration-300 font-medium flex items-center gap-2 tracking-wide text-sm font-[family-name:var(--font-montserrat)]"
+                                className="text-[#3A3A3A] hover:text-[#4A9B9F] transition-colors font-medium flex items-center gap-2 text-sm group"
                             >
-                                <ShoppingBag size={18} />
+                                <ShoppingBag size={18} className="text-[#9E9E9E] group-hover:text-[#4A9B9F] transition-colors" />
                                 {t('nav.orders')}
                             </Link>
                         )}
@@ -60,9 +60,9 @@ export default function Navbar() {
                         {/* Language Toggle */}
                         <button
                             onClick={toggleLanguage}
-                            className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-[#7BC5CC]/30 hover:border-[#7BC5CC] text-[#7BC5CC] rounded-lg transition-all duration-300 text-xs font-semibold tracking-wider shadow-lg hover:shadow-xl font-[family-name:var(--font-montserrat)]"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FAF8F5] border border-[#E8D5C4] hover:border-[#4A9B9F] text-[#3A3A3A] transition-all text-xs font-bold tracking-wide hover:shadow-sm"
                         >
-                            <Globe size={14} />
+                            <Globe size={14} className="text-[#4A9B9F]" />
                             {language.toUpperCase()}
                         </button>
 
@@ -70,14 +70,14 @@ export default function Navbar() {
                             <div className="flex items-center gap-4">
                                 <Link
                                     href={`/profile/${user.id}`}
-                                    className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-[#7BC5CC]/30 text-[#7BC5CC] hover:bg-gradient-to-r hover:from-[#C89E7C] hover:to-[#7BC5CC] hover:text-white hover:border-transparent rounded-lg transition-all duration-300 shadow-lg font-[family-name:var(--font-montserrat)]"
+                                    className="flex items-center gap-2 px-4 py-2 bg-[#F5E6D3]/30 border border-[#F5E6D3] text-[#4A2C1C] rounded-full hover:bg-[#F5E6D3] transition-all"
                                 >
                                     <User size={18} />
-                                    <span className="font-semibold text-sm">{user.name}</span>
+                                    <span className="font-bold text-sm">{user.name}</span>
                                 </Link>
                                 <button
                                     onClick={signOut}
-                                    className="p-2 border border-[#C89E7C]/50 text-[#C89E7C] hover:bg-[#C89E7C] hover:text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                                    className="p-2 text-[#9E9E9E] hover:text-[#FF6B6B] transition-colors"
                                 >
                                     <LogOut size={18} />
                                 </button>
@@ -86,13 +86,13 @@ export default function Navbar() {
                             <div className="flex items-center gap-4">
                                 <Link
                                     href="/auth/login"
-                                    className="px-6 py-2 text-[#E8D5C4] hover:text-[#7BC5CC] font-semibold text-sm tracking-wide transition-all duration-300 font-[family-name:var(--font-montserrat)]"
+                                    className="px-6 py-2 text-[#2C1810] hover:text-[#4A9B9F] font-medium text-sm transition-colors"
                                 >
                                     {t('nav.login')}
                                 </Link>
                                 <Link
                                     href="/auth/register"
-                                    className="px-6 py-2 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white rounded-lg font-semibold text-sm tracking-wide hover:shadow-xl transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
+                                    className="px-6 py-2 bg-[#2C1810] text-white rounded-full font-medium text-sm hover:bg-[#4A2C1C] transition-all shadow-[0_4px_10px_rgba(44,24,16,0.2)] hover:shadow-[0_6px_15px_rgba(44,24,16,0.3)] hover:-translate-y-0.5"
                                 >
                                     {t('nav.register')}
                                 </Link>
@@ -103,7 +103,7 @@ export default function Navbar() {
                     {/* Mobile menu button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 text-[#7BC5CC] border border-[#7BC5CC]/30 hover:bg-[#7BC5CC]/10 rounded-lg transition-all duration-300"
+                        className="md:hidden p-2 text-[#2C1810] hover:bg-[#FAF8F5] rounded-lg transition-colors"
                     >
                         {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
@@ -111,18 +111,18 @@ export default function Navbar() {
 
                 {/* Mobile menu */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t-2 border-[#333] bg-[#050510]">
-                        <div className="flex flex-col gap-4">
+                    <div className="md:hidden py-4 border-t border-[#F5E6D3] bg-white animate-fade-in-down">
+                        <div className="flex flex-col gap-2">
                             <Link
                                 href="/"
-                                className="px-4 py-3 text-[#e2e8f0] hover:bg-[#1a1a2e] hover:text-[#00f0ff] border-l-4 border-transparent hover:border-[#00f0ff] uppercase font-bold"
+                                className="px-4 py-3 text-[#3A3A3A] hover:bg-[#FAF8F5] hover:text-[#4A9B9F] font-medium"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 {t('nav.home')}
                             </Link>
                             <Link
                                 href="/search"
-                                className="px-4 py-3 text-[#e2e8f0] hover:bg-[#1a1a2e] hover:text-[#00f0ff] border-l-4 border-transparent hover:border-[#00f0ff] uppercase font-bold flex items-center gap-3"
+                                className="px-4 py-3 text-[#3A3A3A] hover:bg-[#FAF8F5] hover:text-[#4A9B9F] font-medium flex items-center gap-3"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 <Search size={18} />
@@ -132,7 +132,7 @@ export default function Navbar() {
                                 <>
                                     <Link
                                         href="/orders"
-                                        className="px-4 py-3 text-[#e2e8f0] hover:bg-[#1a1a2e] hover:text-[#00f0ff] border-l-4 border-transparent hover:border-[#00f0ff] uppercase font-bold flex items-center gap-3"
+                                        className="px-4 py-3 text-[#3A3A3A] hover:bg-[#FAF8F5] hover:text-[#4A9B9F] font-medium flex items-center gap-3"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <ShoppingBag size={18} />
@@ -140,7 +140,7 @@ export default function Navbar() {
                                     </Link>
                                     <Link
                                         href={`/profile/${user.id}`}
-                                        className="px-4 py-3 text-[#e2e8f0] hover:bg-[#1a1a2e] hover:text-[#00f0ff] border-l-4 border-transparent hover:border-[#00f0ff] uppercase font-bold flex items-center gap-3"
+                                        className="px-4 py-3 text-[#3A3A3A] hover:bg-[#FAF8F5] hover:text-[#4A9B9F] font-medium flex items-center gap-3"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <User size={18} />
@@ -148,27 +148,27 @@ export default function Navbar() {
                                     </Link>
                                 </>
                             )}
-                            <div className="border-t-2 border-[#333] mt-2 pt-4 px-4">
+                            <div className="border-t border-[#F5E6D3] mt-2 pt-4 px-4">
                                 <button
                                     onClick={toggleLanguage}
-                                    className="w-full px-4 py-2 text-left text-[#00f0ff] border-2 border-[#00f0ff] bg-black hover:bg-[#00f0ff] hover:text-black uppercase font-bold flex items-center gap-2 transition-all"
+                                    className="w-full px-4 py-2 text-left text-[#3A3A3A] bg-[#FAF8F5] rounded-lg font-medium flex items-center gap-2"
                                 >
-                                    <Globe size={18} />
+                                    <Globe size={18} className="text-[#4A9B9F]" />
                                     {language === 'uz' ? "O'zbek" : 'Русский'}
                                 </button>
                             </div>
                             {!user && (
-                                <div className="border-t-2 border-[#333] mt-2 pt-4 flex flex-col gap-4 px-4">
+                                <div className="border-t border-[#F5E6D3] mt-2 pt-4 flex flex-col gap-3 px-4">
                                     <Link
                                         href="/auth/login"
-                                        className="px-4 py-3 text-center text-[#00f0ff] border-2 border-[#00f0ff] hover:bg-[#00f0ff] hover:text-black uppercase font-bold transition-all"
+                                        className="px-4 py-3 text-center text-[#2C1810] border border-[#2C1810] rounded-lg font-medium hover:bg-[#FAF8F5] transition-all"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {t('nav.login')}
                                     </Link>
                                     <Link
                                         href="/auth/register"
-                                        className="px-4 py-3 text-center bg-[#00f0ff] text-black border-2 border-[#00f0ff] uppercase font-bold hover:bg-transparent hover:text-[#00f0ff] transition-all shadow-[4px_4px_0_#bd00ff]"
+                                        className="px-4 py-3 text-center bg-[#2C1810] text-white rounded-lg font-medium hover:bg-[#4A2C1C] transition-all shadow-md"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {t('nav.register')}

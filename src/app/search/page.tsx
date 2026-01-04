@@ -135,7 +135,7 @@ function SearchContent() {
                         <button
                             type="button"
                             onClick={() => setShowFilters(!showFilters)}
-                            className={`flex items-center gap-2 px-4 h-12 rounded-xl border-2 transition-colors ${showFilters ? 'bg-blue-50 border-blue-500 text-blue-600' : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
+                            className={`flex items-center gap-2 px-4 h-12 rounded-xl border-2 transition-colors ${showFilters ? 'bg-[#2C1810]/10 border-[#2C1810] text-[#2C1810]' : 'bg-white border-[#E8D5C4] text-[#3A3A3A] hover:border-[#C89E7C]'
                                 }`}
                         >
                             <SlidersHorizontal size={20} />
@@ -146,7 +146,7 @@ function SearchContent() {
                         <button
                             type="button"
                             onClick={() => setShowMap(!showMap)}
-                            className={`flex items-center gap-2 px-4 h-12 rounded-xl border-2 transition-colors ${showMap ? 'bg-green-50 border-green-500 text-green-600' : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
+                            className={`flex items-center gap-2 px-4 h-12 rounded-xl border-2 transition-colors ${showMap ? 'bg-[#4A9B9F]/10 border-[#4A9B9F] text-[#4A9B9F]' : 'bg-white border-[#E8D5C4] text-[#3A3A3A] hover:border-[#C89E7C]'
                                 }`}
                         >
                             <MapPin size={20} />
@@ -154,7 +154,7 @@ function SearchContent() {
                         </button>
 
                         {/* Search button */}
-                        <button type="submit" className="btn-primary h-12 px-8">
+                        <button type="submit" className="bg-[#2C1810] text-white hover:bg-[#4A2C1C] h-12 px-8 rounded-xl font-medium transition-colors shadow-lg shadow-[#2C1810]/20">
                             {t('nav.search')}
                         </button>
                     </form>
@@ -254,7 +254,7 @@ function SearchContent() {
                     <div className="flex gap-2 flex-wrap mb-6">
                         <button
                             onClick={() => setCategory('')}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!category ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!category ? 'bg-[#2C1810] text-white' : 'bg-white text-[#3A3A3A] hover:bg-[#FAF8F5] border border-[#E8D5C4]'
                                 }`}
                         >
                             Barchasi
@@ -263,7 +263,7 @@ function SearchContent() {
                             <button
                                 key={cat}
                                 onClick={() => setCategory(category === cat ? '' : cat)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${category === cat ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${category === cat ? 'bg-[#2C1810] text-white' : 'bg-white text-[#3A3A3A] hover:bg-[#FAF8F5] border border-[#E8D5C4]'
                                     }`}
                             >
                                 {t(`categories.${cat}`)}

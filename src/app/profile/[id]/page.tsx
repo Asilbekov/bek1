@@ -169,7 +169,7 @@ export default function ProfilePage({ params }: PageProps) {
                 {/* Profile Header */}
                 <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-6">
                     {/* Cover */}
-                    <div className="h-32 bg-gradient-to-r from-blue-500 to-purple-500" />
+                    <div className="h-32 bg-gradient-to-r from-[#2C1810] to-[#4A9B9F]" />
 
                     {/* Profile info */}
                     <div className="px-6 pb-6">
@@ -200,7 +200,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         <span>({reviews.length} {t('profile.reviews').toLowerCase()})</span>
                                     </div>
                                     {profile.role === 'PROVIDER' && (
-                                        <span className="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-full text-sm">
+                                        <span className="px-2 py-0.5 bg-[#4A9B9F]/10 text-[#4A9B9F] rounded-full text-sm">
                                             {t('auth.provider')}
                                         </span>
                                     )}
@@ -222,16 +222,16 @@ export default function ProfilePage({ params }: PageProps) {
                         <div className="grid sm:grid-cols-2 gap-4 mt-6">
                             {profile.address && (
                                 <div className="flex items-center gap-3 text-gray-600">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                                        <MapPin className="text-blue-600" size={20} />
+                                    <div className="w-10 h-10 rounded-xl bg-[#F5E6D3]/50 flex items-center justify-center">
+                                        <MapPin className="text-[#C89E7C]" size={20} />
                                     </div>
                                     <span>{profile.address}</span>
                                 </div>
                             )}
                             {profile.phone && (
                                 <div className="flex items-center gap-3 text-gray-600">
-                                    <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center">
-                                        <Phone className="text-green-600" size={20} />
+                                    <div className="w-10 h-10 rounded-xl bg-[#E8F4F5] flex items-center justify-center">
+                                        <Phone className="text-[#4A9B9F]" size={20} />
                                     </div>
                                     <span>{profile.phone}</span>
                                 </div>
@@ -246,7 +246,7 @@ export default function ProfilePage({ params }: PageProps) {
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-xl font-bold text-gray-900">{t('profile.services')}</h2>
                             {isOwnProfile && (
-                                <Link href="/profile/services/add" className="text-blue-600 hover:underline flex items-center gap-1">
+                                <Link href="/profile/services/add" className="text-[#4A9B9F] hover:underline flex items-center gap-1">
                                     <Plus size={18} />
                                     {t('profile.addService')}
                                 </Link>
@@ -258,10 +258,10 @@ export default function ProfilePage({ params }: PageProps) {
                                 <div key={service.id} className="border border-gray-100 rounded-2xl p-4">
                                     <div className="flex items-center gap-3 mb-3">
                                         {categoryIcons[service.category_id] && (
-                                            <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${categoryIcons[service.category_id].gradient} flex items-center justify-center`}>
+                                            <div className={`w-10 h-10 rounded-xl ${categoryIcons[service.category_id].colorClass} flex items-center justify-center`}>
                                                 {(() => {
                                                     const Icon = categoryIcons[service.category_id].icon
-                                                    return <Icon className="text-white" size={20} />
+                                                    return <Icon size={20} />
                                                 })()}
                                             </div>
                                         )}
@@ -381,8 +381,8 @@ export default function ProfilePage({ params }: PageProps) {
                                             key={date}
                                             onClick={() => setSelectedDate(date)}
                                             className={`flex-shrink-0 w-14 py-2 rounded-xl text-center transition-colors ${selectedDate === date
-                                                    ? 'bg-blue-600 text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                ? 'bg-blue-600 text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                 }`}
                                         >
                                             <div className="text-xs">{dayName}</div>
@@ -405,8 +405,8 @@ export default function ProfilePage({ params }: PageProps) {
                                         key={time}
                                         onClick={() => setSelectedTime(time)}
                                         className={`py-2 rounded-xl text-sm font-medium transition-colors ${selectedTime === time
-                                                ? 'bg-blue-600 text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                            ? 'bg-[#2C1810] text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                             }`}
                                     >
                                         {time}
@@ -426,7 +426,7 @@ export default function ProfilePage({ params }: PageProps) {
                             <button
                                 onClick={handleBookService}
                                 disabled={!selectedDate || !selectedTime}
-                                className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="flex-1 bg-[#2C1810] text-white py-3 rounded-xl font-medium hover:bg-[#4A2C1C] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 <MessageCircle size={18} />
                                 {t('order.confirmOrder')}

@@ -21,77 +21,86 @@ export default function HomePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#2C1810] via-[#1A3A52] to-[#2C1810]">
+        <div className="min-h-screen bg-[#FAF8F5] relative font-sans selection:bg-[#4A9B9F] selection:text-white">
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative overflow-hidden">
+            <section className="relative overflow-hidden pt-24 pb-32 lg:pt-32 lg:pb-40">
                 {/* Background decoration */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#7BC5CC]/20 blur-3xl" />
-                    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#C89E7C]/20 blur-3xl" />
-                    {/* Elegant subtle pattern */}
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] opacity-30" />
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#2C1810]/5 via-transparent to-[#1A3A52]/5" />
+                    <div className="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-[#4A9B9F]/10 blur-3xl" />
+                    <div className="absolute top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[#C89E7C]/10 blur-3xl" />
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 text-center">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <div className="max-w-4xl mx-auto">
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white text-sm font-semibold rounded-full mb-8 shadow-lg hover:shadow-xl transition-all duration-300 cursor-default font-[family-name:var(--font-montserrat)]">
-                            <Star size={16} className="fill-white" />
-                            <span>O'zbekistonning #1 xizmatlar platformasi</span>
+                        <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/50 backdrop-blur-md rounded-full border border-[#C89E7C]/20 shadow-sm mb-10 animate-fade-in hover:shadow-md transition-all cursor-default text-[#4A2C1C]">
+                            <Star size={14} className="fill-[#C89E7C] text-[#C89E7C]" />
+                            <span className="text-sm font-medium tracking-wide">O'zbekistonning #1 xizmatlar platformasi</span>
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6D3] via-[#B8D8DB] to-[#E8D5C4] mb-8 leading-tight font-[family-name:var(--font-playfair)]">
+                        <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-[#2C1810] mb-8 animate-fade-in leading-tight tracking-tight" style={{ animationDelay: '0.1s' }}>
                             {t('home.title')}
                         </h1>
 
                         {/* Subtitle */}
-                        <p className="text-xl text-[#B8D8DB] mb-12 max-w-2xl mx-auto leading-relaxed font-[family-name:var(--font-inter)]">
+                        <p className="text-xl sm:text-2xl text-[#3A3A3A]/80 mb-12 animate-fade-in font-light max-w-2xl mx-auto leading-relaxed" style={{ animationDelay: '0.2s' }}>
                             {t('home.subtitle')}
                         </p>
 
                         {/* Search Bar */}
-                        <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto mb-16">
+                        <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto animate-fade-in mb-20 drop-shadow-xl" style={{ animationDelay: '0.3s' }}>
                             <div className="relative flex items-center group">
-                                <Search className="absolute left-5 text-[#4A9B9F]" size={22} />
+                                <div className="absolute inset-0 bg-white rounded-full shadow-2xl opacity-90 group-hover:opacity-100 transition-opacity" />
+                                <Search className="absolute left-6 text-[#9E9E9E]" size={24} />
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder={t('home.searchPlaceholder')}
-                                    className="w-full py-5 pl-14 pr-40 text-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-[#F5E6D3] shadow-xl focus:border-[#7BC5CC] focus:shadow-2xl focus:outline-none transition-all placeholder:text-[#B8D8DB]/50 font-[family-name:var(--font-inter)]"
+                                    className="relative w-full py-5 pl-16 pr-44 text-lg bg-transparent border-none focus:ring-0 text-[#2C1810] placeholder:text-[#9E9E9E]/80 placeholder:font-light"
                                 />
                                 <button
                                     type="submit"
-                                    className="absolute right-2 px-6 py-2.5 bg-gradient-to-r from-[#4A9B9F] to-[#7BC5CC] text-white font-semibold rounded-xl hover:from-[#7BC5CC] hover:to-[#4A9B9F] transition-all duration-300 flex items-center gap-2 shadow-lg font-[family-name:var(--font-montserrat)]"
+                                    className="absolute right-2 px-8 py-3 bg-[#2C1810] text-white rounded-full font-medium hover:bg-[#4A2C1C] transition-all flex items-center gap-2 group/btn"
                                 >
                                     {t('nav.search')}
-                                    <ArrowRight size={18} />
+                                    <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
                                 </button>
                             </div>
                         </form>
 
                         {/* Quick stats */}
-                        <div className="flex flex-wrap justify-center gap-8">
-                            <div className="flex items-center gap-3 text-[#E8D5C4] group hover:text-[#7BC5CC] transition-colors duration-300 cursor-default">
-                                <div className="w-14 h-14 bg-gradient-to-br from-[#4A9B9F]/20 to-[#7BC5CC]/20 backdrop-blur-sm border border-[#7BC5CC]/30 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                                    <Shield className="text-[#7BC5CC]" size={24} />
+                        <div className="flex flex-wrap justify-center gap-6 sm:gap-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                            <div className="flex items-center gap-3 group cursor-default">
+                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:-translate-y-1 transition-transform duration-300">
+                                    <Shield className="text-[#4A9B9F]" size={24} />
                                 </div>
-                                <span className="text-sm tracking-wide font-[family-name:var(--font-montserrat)]">Ishonchli ustalar</span>
+                                <div className="text-left">
+                                    <h3 className="text-[#2C1810] font-bold text-sm">Ishonchli ustalar</h3>
+                                    <p className="text-[#9E9E9E] text-xs">Tekshirilgan mutaxassislar</p>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-3 text-[#E8D5C4] group hover:text-[#4A9B9F] transition-colors duration-300 cursor-default">
-                                <div className="w-14 h-14 bg-gradient-to-br from-[#4A9B9F]/20 to-[#7BC5CC]/20 backdrop-blur-sm border border-[#4A9B9F]/30 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                                    <Clock className="text-[#4A9B9F]" size={24} />
+                            <div className="flex items-center gap-3 group cursor-default">
+                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:-translate-y-1 transition-transform duration-300">
+                                    <Clock className="text-[#C89E7C]" size={24} />
                                 </div>
-                                <span className="text-sm tracking-wide font-[family-name:var(--font-montserrat)]">24/7 qo'llab-quvvatlash</span>
+                                <div className="text-left">
+                                    <h3 className="text-[#2C1810] font-bold text-sm">24/7 qo'llab-quvvatlash</h3>
+                                    <p className="text-[#9E9E9E] text-xs">Har doim aloqada</p>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-3 text-[#E8D5C4] group hover:text-[#C89E7C] transition-colors duration-300 cursor-default">
-                                <div className="w-14 h-14 bg-gradient-to-br from-[#C89E7C]/20 to-[#E8D5C4]/20 backdrop-blur-sm border border-[#C89E7C]/30 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                                    <Star className="text-[#C89E7C] fill-[#C89E7C]" size={24} />
+                            <div className="flex items-center gap-3 group cursor-default">
+                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:-translate-y-1 transition-transform duration-300">
+                                    <Star className="text-[#4A2C1C] fill-[#4A2C1C]" size={24} />
                                 </div>
-                                <span className="text-sm tracking-wide font-[family-name:var(--font-montserrat)]">1000+ baholangan usta</span>
+                                <div className="text-left">
+                                    <h3 className="text-[#2C1810] font-bold text-sm">1000+ baholangan usta</h3>
+                                    <p className="text-[#9E9E9E] text-xs">Haqiqiy baholar</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,61 +108,80 @@ export default function HomePage() {
             </section>
 
             {/* Categories Section */}
-            <section className="py-16 bg-gradient-to-b from-[#1A3A52] to-[#2C1810] relative">
+            <section className="py-24 bg-white relative">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between mb-12">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] tracking-wide font-[family-name:var(--font-playfair)]">
-                            {t('home.allCategories')}
-                        </h2>
+                    <div className="flex items-end justify-between mb-16">
+                        <div>
+                            <span className="text-[#4A9B9F] font-bold tracking-wider text-sm uppercase mb-2 block">Xizmatlar</span>
+                            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#2C1810]">
+                                {t('home.allCategories')}
+                            </h2>
+                        </div>
                         <Link
                             href="/search"
-                            className="text-[#7BC5CC] hover:text-[#C89E7C] font-semibold tracking-wide flex items-center gap-2 transition-all duration-300 font-[family-name:var(--font-montserrat)]"
+                            className="hidden sm:flex items-center gap-2 text-[#C89E7C] font-medium hover:text-[#4A2C1C] transition-colors group"
                         >
                             {t('home.viewAll')}
-                            <ArrowRight size={18} />
+                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
                     <CategoryGrid />
+
+                    <div className="mt-12 text-center sm:hidden">
+                        <Link
+                            href="/search"
+                            className="inline-flex items-center gap-2 text-[#C89E7C] font-medium hover:text-[#4A2C1C] transition-colors"
+                        >
+                            {t('home.viewAll')}
+                            <ArrowRight size={20} />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
             {/* How it works */}
-            <section className="py-16 bg-gradient-to-b from-[#2C1810] to-[#1A3A52]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-16 tracking-wide font-[family-name:var(--font-playfair)]">
-                        Qanday <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7BC5CC] to-[#C89E7C]">ishlaydi?</span>
-                    </h2>
+            <section className="py-24 bg-[#F5E6D3]/20 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="text-center mb-20">
+                        <span className="text-[#C89E7C] font-bold tracking-wider text-sm uppercase mb-2 block">Jarayon</span>
+                        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#2C1810]">
+                            Qanday <span className="text-[#4A9B9F] italic">ishlaydi?</span>
+                        </h2>
+                    </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-3 gap-12 relative">
+                        {/* Connecting line */}
+                        <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-[#C89E7C]/30 to-transparent" />
+
                         {/* Step 1 */}
-                        <div className="text-center group">
-                            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#4A9B9F] to-[#7BC5CC] rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-xl group-hover:scale-110 transition-all duration-300 font-[family-name:var(--font-playfair)]">
+                        <div className="text-center group relative">
+                            <div className="w-24 h-24 mx-auto mb-8 bg-white rounded-full flex items-center justify-center text-[#2C1810] text-3xl font-serif font-bold shadow-[0_8px_30px_rgb(0,0,0,0.06)] group-hover:scale-110 transition-transform duration-300 relative z-10">
                                 1
                             </div>
-                            <h3 className="text-xl font-semibold text-[#7BC5CC] mb-3 font-[family-name:var(--font-montserrat)]">Xizmat tanlang</h3>
-                            <p className="text-[#B8D8DB] text-sm leading-relaxed px-4 font-[family-name:var(--font-inter)]">
+                            <h3 className="text-xl font-bold text-[#2C1810] mb-4">Xizmat tanlang</h3>
+                            <p className="text-[#3A3A3A]/70 leading-relaxed px-4">
                                 Sizga kerakli xizmatni kategoriya yoki ism bo'yicha qidiring
                             </p>
                         </div>
 
                         {/* Step 2 */}
-                        <div className="text-center group">
-                            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#C89E7C] to-[#E8D5C4] rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-xl group-hover:scale-110 transition-all duration-300 font-[family-name:var(--font-playfair)]">
+                        <div className="text-center group relative">
+                            <div className="w-24 h-24 mx-auto mb-8 bg-white rounded-full flex items-center justify-center text-[#4A9B9F] text-3xl font-serif font-bold shadow-[0_8px_30px_rgb(0,0,0,0.06)] group-hover:scale-110 transition-transform duration-300 relative z-10">
                                 2
                             </div>
-                            <h3 className="text-xl font-semibold text-[#C89E7C] mb-3 font-[family-name:var(--font-montserrat)]">Vaqt belgilang</h3>
-                            <p className="text-[#B8D8DB] text-sm leading-relaxed px-4 font-[family-name:var(--font-inter)]">
+                            <h3 className="text-xl font-bold text-[#2C1810] mb-4">Vaqt belgilang</h3>
+                            <p className="text-[#3A3A3A]/70 leading-relaxed px-4">
                                 Kalendardan qulay kun va soatni tanlang, narxni ko'ring
                             </p>
                         </div>
 
                         {/* Step 3 */}
-                        <div className="text-center group">
-                            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#7BC5CC] to-[#C89E7C] rounded-2xl flex items-center justify-center text-white text-4xl font-bold shadow-xl group-hover:scale-110 transition-all duration-300 font-[family-name:var(--font-playfair)]">
+                        <div className="text-center group relative">
+                            <div className="w-24 h-24 mx-auto mb-8 bg-white rounded-full flex items-center justify-center text-[#C89E7C] text-3xl font-serif font-bold shadow-[0_8px_30px_rgb(0,0,0,0.06)] group-hover:scale-110 transition-transform duration-300 relative z-10">
                                 3
                             </div>
-                            <h3 className="text-xl font-semibold text-[#4A9B9F] mb-3 font-[family-name:var(--font-montserrat)]">Chat orqali gaplashing</h3>
-                            <p className="text-[#B8D8DB] text-sm leading-relaxed px-4 font-[family-name:var(--font-inter)]">
+                            <h3 className="text-xl font-bold text-[#2C1810] mb-4">Chat orqali gaplashing</h3>
+                            <p className="text-[#3A3A3A]/70 leading-relaxed px-4">
                                 Usta bilan bevosita bog'laning va lokatsiyangizni jo'nating
                             </p>
                         </div>
@@ -162,22 +190,26 @@ export default function HomePage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 relative overflow-hidden bg-gradient-to-b from-[#1A3A52] to-[#2C1810]">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 sm:p-12 text-center overflow-hidden shadow-2xl border border-white/10">
-                        <div className="relative">
-                            <h2 className="text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6D3] to-[#7BC5CC] mb-6 tracking-wide font-[family-name:var(--font-playfair)]">
+            <section className="py-24 relative overflow-hidden">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                        <div className="absolute inset-0 bg-[#2C1810]" />
+                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2587&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#2C1810] to-[#2C1810]/50" />
+
+                        <div className="relative p-12 sm:p-20 text-center">
+                            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white mb-6 leading-tight">
                                 Siz ham usta bo'lmoqchimisiz?
                             </h2>
-                            <p className="text-[#B8D8DB] mb-8 max-w-lg mx-auto leading-relaxed font-[family-name:var(--font-inter)]">
+                            <p className="text-[#E8D5C4] mb-10 max-w-lg mx-auto text-lg leading-relaxed">
                                 O'z xizmatlaringizni platformaga qo'shing va minglab mijozlarga yetib boring
                             </p>
                             <Link
                                 href="/auth/register"
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white text-lg font-semibold tracking-wide rounded-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 font-[family-name:var(--font-montserrat)]"
+                                className="inline-flex items-center gap-3 px-10 py-4 bg-[#C89E7C] text-white text-lg font-bold rounded-full hover:bg-[#B68C6A] transition-all shadow-[0_4px_20px_rgba(200,158,124,0.4)] hover:shadow-[0_6px_25px_rgba(200,158,124,0.5)] hover:-translate-y-1"
                             >
                                 Ro'yxatdan o'tish
-                                <ArrowRight size={24} />
+                                <ArrowRight size={20} />
                             </Link>
                         </div>
                     </div>
@@ -185,16 +217,42 @@ export default function HomePage() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-gradient-to-b from-[#2C1810] to-[#1A1A1A] text-[#B8D8DB] py-12 border-t border-white/10">
+            <footer className="bg-[#1A3A52] text-[#E8F4F5] py-16 border-t border-[#4A9B9F]/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-to-br from-[#C89E7C] to-[#7BC5CC] rounded-xl flex items-center justify-center shadow-lg">
-                                <span className="text-white font-bold text-xl font-[family-name:var(--font-playfair)]">B</span>
+                    <div className="grid md:grid-cols-4 gap-12 mb-16">
+                        <div className="col-span-1 md:col-span-2">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-10 h-10 bg-[#4A9B9F] rounded-lg flex items-center justify-center shadow-lg">
+                                    <span className="text-white font-serif font-bold text-xl">B</span>
+                                </div>
+                                <span className="text-2xl font-serif font-bold text-white tracking-wide">Bek.uz</span>
                             </div>
-                            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] tracking-wide font-[family-name:var(--font-playfair)]">Bek.uz</span>
+                            <p className="text-[#B8D8DB] max-w-sm leading-relaxed">
+                                O'zbekistonning eng ishonchli xizmatlar platformasi. Sizning qulayligingiz - bizning ustuvorligimiz.
+                            </p>
                         </div>
-                        <p className="text-sm text-[#9E9E9E] font-[family-name:var(--font-inter)]">
+
+                        <div>
+                            <h4 className="text-white font-bold mb-6">Platforma</h4>
+                            <ul className="space-y-4">
+                                <li><Link href="/search" className="text-[#B8D8DB] hover:text-white transition-colors">Xizmatlar</Link></li>
+                                <li><Link href="/auth/login" className="text-[#B8D8DB] hover:text-white transition-colors">Kirish</Link></li>
+                                <li><Link href="/auth/register" className="text-[#B8D8DB] hover:text-white transition-colors">Ro'yxatdan o'tish</Link></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-white font-bold mb-6">Yordam</h4>
+                            <ul className="space-y-4">
+                                <li><Link href="#" className="text-[#B8D8DB] hover:text-white transition-colors">Qo'llab-quvvatlash</Link></li>
+                                <li><Link href="#" className="text-[#B8D8DB] hover:text-white transition-colors">Maxfiylik siyosati</Link></li>
+                                <li><Link href="#" className="text-[#B8D8DB] hover:text-white transition-colors">Foydalanish shartlari</Link></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="pt-8 border-t border-[#4A9B9F]/20 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-sm text-[#B8D8DB]">
                             © 2026 Bek.uz. All rights reserved.
                         </p>
                     </div>

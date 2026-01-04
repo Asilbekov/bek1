@@ -10,12 +10,12 @@ const inter = Inter({
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
 });
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uz">
-      <body className={`${inter.variable} ${playfair.variable} ${montserrat.variable} antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} ${montserrat.variable} antialiased font-sans`}>
         <Providers>
           {children}
         </Providers>

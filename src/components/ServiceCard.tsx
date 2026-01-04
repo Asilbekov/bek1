@@ -28,53 +28,57 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
     return (
         <Link
             href={`/profile/${provider.id}`}
-            className="group block hover:z-10 bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-[#7BC5CC]/50 transition-all duration-300 hover:shadow-2xl hover:scale-105"
+            className="group block relative bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1"
         >
             {/* Avatar Section */}
-            <div className="relative h-48 bg-gradient-to-br from-[#4A2C1C] to-[#1A3A52] p-2">
-                {/* Subtle pattern background for avatar area */}
-                <div className="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#7BC5CC_25%,transparent_25%,transparent_75%,#7BC5CC_75%,#7BC5CC),linear-gradient(45deg,#7BC5CC_25%,transparent_25%,transparent_75%,#7BC5CC_75%,#7BC5CC)] bg-[length:30px_30px] bg-[position:0_0,15px_15px]" />
+            <div className="relative h-48 bg-gradient-to-br from-[#2C1810] to-[#4A2C1C]">
+                {/* Decorative pattern */}
+                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:20px_20px]" />
 
                 {provider.avatar ? (
                     <img
                         src={provider.avatar}
                         alt={`${provider.name} ${provider.surname}`}
-                        className="w-full h-full object-cover rounded-xl group-hover:ring-2 group-hover:ring-[#7BC5CC] transition-all duration-300"
+                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center relative z-10">
-                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#C89E7C] to-[#7BC5CC] flex items-center justify-center text-white text-4xl font-bold shadow-xl font-[family-name:var(--font-playfair)]">
+                        <div className="w-20 h-20 rounded-full border-4 border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-[#E8D5C4] text-3xl font-serif font-bold">
                             {provider.name?.[0]?.toUpperCase()}
                         </div>
                     </div>
                 )}
 
+                {/* Overlay gradient */}
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+
                 {/* Price Badge */}
                 {minPrice && minPrice !== Infinity && (
-                    <div className="absolute bottom-3 right-3 px-4 py-2 bg-gradient-to-r from-[#C89E7C] to-[#7BC5CC] text-white rounded-full text-xs font-semibold shadow-lg z-20 font-[family-name:var(--font-montserrat)]">
-                        {t('service.priceFrom')} {minPrice.toLocaleString()} {t('service.sum')}
+                    <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur rounded-full text-[#2C1810] text-xs font-bold shadow-lg flex items-center gap-1">
+                        <span className="text-[#4A9B9F] font-serif italic">{t('service.priceFrom')}</span>
+                        <span>{minPrice.toLocaleString()} {t('service.sum')}</span>
                     </div>
                 )}
             </div>
 
             {/* Content */}
-            <div className="p-4 bg-gradient-to-b from-[#2C1810]/50 to-[#1A3A52]/50">
-                <h3 className="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6D3] to-[#7BC5CC] tracking-wide truncate mb-1 font-[family-name:var(--font-playfair)]">
+            <div className="p-5">
+                <h3 className="font-serif font-bold text-lg text-[#2C1810] truncate mb-2 group-hover:text-[#4A9B9F] transition-colors">
                     {provider.name} {provider.surname}
                 </h3>
 
                 {/* Rating */}
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-2 mb-4">
                     <StarRating rating={provider.averageRating ?? 0} size="sm" />
-                    <span className="text-xs text-[#B8D8DB] font-[family-name:var(--font-montserrat)]">
-                        [{provider.reviewCount ?? 0} reviews]
+                    <span className="text-xs text-[#9E9E9E] font-medium tracking-wide">
+                        ({provider.reviewCount ?? 0} {language === 'uz' ? 'sharhlar' : 'отзывов'})
                     </span>
                 </div>
 
                 {/* Location */}
                 {provider.address && (
-                    <div className="flex items-center gap-2 text-sm text-[#E8D5C4] mb-3 font-[family-name:var(--font-inter)]">
-                        <MapPin size={14} className="text-[#4A9B9F]" />
+                    <div className="flex items-center gap-2 text-sm text-[#3A3A3A]/70 mb-4">
+                        <MapPin size={14} className="text-[#C89E7C]" />
                         <span className="truncate">{provider.address}</span>
                     </div>
                 )}
@@ -85,7 +89,7 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
                         {provider.services.slice(0, 3).map((service, i) => (
                             <span
                                 key={i}
-                                className="px-3 py-1 bg-white/5 backdrop-blur-sm border border-[#7BC5CC]/30 text-[#7BC5CC] text-[10px] rounded-full tracking-wide hover:border-[#C89E7C]/50 hover:text-[#C89E7C] transition-colors duration-300 font-[family-name:var(--font-montserrat)]"
+                                className="px-2.5 py-1 bg-[#F5E6D3]/30 text-[#4A2C1C] text-[10px] font-bold uppercase tracking-wider rounded-md border border-[#F5E6D3]"
                             >
                                 {t(`categories.${service.category_id}`)}
                             </span>
