@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { User } from '@/lib/supabase'
+import { User } from '@prisma/client'
 import Link from 'next/link'
 
 // Fix for default marker icons in Leaflet with Next.js

@@ -1,113 +1,91 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { supabase, User } from './supabase'
+import React, { createContext, useContext, ReactNode } from 'react'
+import { SessionProvider, useSession, signOut as nextAuthSignOut, signIn as nextAuthSignIn } from 'next-auth/react'
+import { UserRole } from '@prisma/client'
+
+// Shim User type to match what app expects mostly
+export interface User {
+    id: string
+    email: string
+    name: string
+    surname: string
+    phone?: string
+    role: UserRole
+    avatar?: string
+}
 
 interface AuthContextType {
     user: User | null
     loading: boolean
     signIn: (email: string, password: string) => Promise<{ error: string | null }>
-    signUp: (email: string, password: string, userData: Partial<User>) => Promise<{ data?: any; error: string | null }>
+    signUp: (email: string, password: string, userData: any) => Promise<{ data?: any; error: string | null }>
     signOut: () => Promise<void>
     updateProfile: (data: Partial<User>) => Promise<{ error: string | null }>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState<User | null>(null)
-    const [loading, setLoading] = useState(true)
+function AuthProviderContent({ children }: { children: ReactNode }) {
+    const { data: session, status } = useSession()
 
-    useEffect(() => {
-        // Check active session
-        const checkSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession()
+    const loading = status === 'loading'
 
-            if (session?.user) {
-                const { data: userData } = await supabase
-                    .from('users')
-                    .select('*')
-                    .eq('id', session.user.id)
-                    .single()
-
-                setUser(userData)
-            }
-            setLoading(false)
-        }
-
-        checkSession()
-
-        // Listen for auth changes
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-            if (event === 'SIGNED_IN' && session?.user) {
-                const { data: userData } = await supabase
-                    .from('users')
-                    .select('*')
-                    .eq('id', session.user.id)
-                    .single()
-
-                setUser(userData)
-            } else if (event === 'SIGNED_OUT') {
-                setUser(null)
-            }
-        })
-
-        return () => subscription.unsubscribe()
-    }, [])
+    // Transform session user to our app's User type
+    const user: User | null = session?.user ? {
+        id: session.user.id || '',
+        email: session.user.email || '',
+        name: session.user.name || '', // NextAuth puts name combined, we might need to split or adjust
+        surname: '', // Session usually doesn't carry this unless customized
+        // @ts-ignore
+        role: session.user.role || 'CLIENT',
+        // @ts-ignore
+        phone: session.user.phone || '',
+    } : null
 
     const signIn = async (email: string, password: string) => {
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) {
-            return { error: error.message }
+        try {
+            const result = await nextAuthSignIn('credentials', {
+                email,
+                password,
+                redirect: false
+            })
+
+            if (result?.error) {
+                return { error: 'Invalid credentials' }
+            }
+            return { error: null }
+        } catch (error) {
+            return { error: 'Sign in failed' }
         }
-        return { error: null }
     }
 
-    const signUp = async (email: string, password: string, userData: Partial<User>) => {
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                data: {
-                    name: userData.name,
-                    surname: userData.surname,
-                    phone: userData.phone,
-                    role: userData.role || 'CLIENT',
-                }
-            }
-        })
-
-        if (error) {
-            return { error: error.message }
-        }
-
-        return { data, error: null }
+    const signUp = async () => {
+        // Register should be handled via server action in the register page directly
+        // But for compatibility with existing code calling this context function:
+        return { error: 'Use register page' }
     }
 
     const signOut = async () => {
-        await supabase.auth.signOut()
-        setUser(null)
+        await nextAuthSignOut({ callbackUrl: '/' })
     }
 
-    const updateProfile = async (data: Partial<User>) => {
-        if (!user) return { error: 'Not authenticated' }
-
-        const { error } = await supabase
-            .from('users')
-            .update(data)
-            .eq('id', user.id)
-
-        if (!error) {
-            setUser({ ...user, ...data })
-        }
-
-        return { error: error?.message || null }
+    const updateProfile = async () => {
+        return { error: 'Not implemented yet' }
     }
 
     return (
         <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, updateProfile }}>
             {children}
         </AuthContext.Provider>
+    )
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+    return (
+        <SessionProvider>
+            <AuthProviderContent>{children}</AuthProviderContent>
+        </SessionProvider>
     )
 }
 

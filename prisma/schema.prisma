@@ -1,0 +1,156 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String?   // For Credentials provider
+  name          String?
+  surname       String?
+  phone         String?
+  avatar        String?
+  address       String?
+  latitude      Float?
+  longitude     Float?
+  card_number   String?
+  role          UserRole  @default(CLIENT)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  services      Service[]
+  ordersAsClient    Order[]   @relation("OrderClient")
+  ordersAsProvider  Order[]   @relation("OrderProvider")
+  messagesSent      Message[] @relation("MessageSender")
+  reviewsGiven      Review[]  @relation("ReviewFrom")
+  reviewsReceived   Review[]  @relation("ReviewTo")
+
+  @@map("users")
+}
+
+enum UserRole {
+  CLIENT
+  PROVIDER
+}
+
+model Category {
+  id        String   @id
+  name_uz   String
+  name_ru   String
+  icon      String
+  services  Service[]
+
+  @@map("categories")
+}
+
+model Service {
+  id            String        @id @default(uuid())
+  user_id       String
+  category_id   String
+  description   String?
+  is_active     Boolean       @default(true)
+  created_at    DateTime      @default(now())
+
+  user          User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  category      Category      @relation(fields: [category_id], references: [id])
+  items         ServiceItem[]
+
+  @@index([user_id])
+  @@index([category_id])
+  @@map("services")
+}
+
+model ServiceItem {
+  id              String   @id @default(uuid())
+  service_id      String
+  name_uz         String
+  name_ru         String
+  price           Decimal  @db.Decimal(12, 2)
+  description_uz  String?
+  description_ru  String?
+
+  service         Service  @relation(fields: [service_id], references: [id], onDelete: Cascade)
+  orders          Order[]
+
+  @@index([service_id])
+  @@map("service_items")
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  client_id       String
+  provider_id     String
+  service_item_id String
+  scheduled_date  DateTime    @db.Date
+  scheduled_time  String
+  location_link   String?
+  latitude        Float?
+  longitude       Float?
+  status          OrderStatus @default(PENDING)
+  price           Decimal     @db.Decimal(12, 2)
+  created_at      DateTime    @default(now())
+
+  client          User        @relation("OrderClient", fields: [client_id], references: [id])
+  provider        User        @relation("OrderProvider", fields: [provider_id], references: [id])
+  service_item    ServiceItem @relation(fields: [service_item_id], references: [id])
+  messages        Message[]
+  reviews         Review[]
+
+  @@index([client_id])
+  @@index([provider_id])
+  @@index([status])
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Message {
+  id          String      @id @default(uuid())
+  order_id    String
+  sender_id   String
+  content     String
+  type        MessageType @default(TEXT)
+  created_at  DateTime    @default(now())
+
+  order       Order       @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  sender      User        @relation("MessageSender", fields: [sender_id], references: [id])
+
+  @@index([order_id])
+  @@map("messages")
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VOICE
+  LOCATION
+}
+
+model Review {
+  id            String   @id @default(uuid())
+  order_id      String
+  from_user_id  String
+  to_user_id    String
+  rating        Int
+  comment       String?
+  created_at    DateTime @default(now())
+
+  order         Order    @relation(fields: [order_id], references: [id])
+  from_user     User     @relation("ReviewFrom", fields: [from_user_id], references: [id])
+  to_user       User     @relation("ReviewTo", fields: [to_user_id], references: [id])
+
+  @@unique([order_id, from_user_id, to_user_id])
+  @@index([to_user_id])
+  @@map("reviews")
+}

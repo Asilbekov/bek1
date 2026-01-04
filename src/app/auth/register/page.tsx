@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useLanguage } from '@/lib/LanguageContext'
 import { useAuth } from '@/lib/AuthContext'
-import { UserRole } from '@/lib/supabase'
+import { UserRole } from '@prisma/client'
 import { Eye, EyeOff, Mail, Lock, User, Phone, ArrowLeft, Briefcase, Users } from 'lucide-react'
 
 export default function RegisterPage() {
     const { t } = useLanguage()
-    const { signUp } = useAuth()
+    const { signIn } = useAuth()
     const router = useRouter()
 
     const [step, setStep] = useState(1)
@@ -52,20 +52,28 @@ export default function RegisterPage() {
 
         setLoading(true)
 
-        const { data, error } = await signUp(formData.email, formData.password, {
+        // Use server action
+        const { registerUser } = await import('@/app/actions/auth')
+        const result = await registerUser({
+            email: formData.email,
+            password: formData.password,
             name: formData.name,
             surname: formData.surname,
             phone: formData.phone,
             role: role!,
         })
 
-        if (error) {
-            setError(error)
+        if (result.error) {
+            setError(result.error)
             setLoading(false)
-        } else if (data?.session) {
-            router.push('/')
         } else {
-            router.push('/auth/login?registered=true')
+            // Auto login after registration
+            const { error: signInError } = await signIn(formData.email, formData.password)
+            if (signInError) {
+                router.push('/auth/login?registered=true')
+            } else {
+                router.push('/')
+            }
         }
     }
 
