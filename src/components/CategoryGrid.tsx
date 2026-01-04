@@ -52,7 +52,6 @@ function CategoryCard({ categoryKey, icon: Icon, gradient }: CategoryCardProps) 
             </h3>
         </Link>
     )
-    )
 }
 
 export default function CategoryGrid() {
