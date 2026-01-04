@@ -4,7 +4,7 @@ import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/lib/LanguageContext'
 import { useAuth } from '@/lib/AuthContext'
-import { supabase, User, Service, ServiceItem, Review } from '@/lib/supabase'
+import { User, Service, ServiceItem, Review } from '@prisma/client'
 import Navbar from '@/components/Navbar'
 import StarRating from '@/components/StarRating'
 import { categoryIcons } from '@/components/CategoryGrid'
@@ -46,47 +46,25 @@ export default function ProfilePage({ params }: PageProps) {
     const fetchProfile = async () => {
         setLoading(true)
 
-        // Fetch user profile
-        const { data: userData } = await supabase
-            .from('users')
-            .select('*')
-            .eq('id', id)
-            .single()
+        try {
+            const { getProfileData } = await import('@/app/actions/profile')
+            const data = await getProfileData(id)
 
-        if (userData) {
-            setProfile(userData)
+            if (data) {
+                // @ts-ignore
+                setProfile(data.user)
+                // @ts-ignore
+                setServices(data.services)
+                // @ts-ignore
+                setReviews(data.reviews)
 
-            // Fetch services with items
-            const { data: servicesData } = await supabase
-                .from('services')
-                .select(`
-          *,
-          items:service_items (*)
-        `)
-                .eq('user_id', id)
-                .eq('is_active', true)
-
-            if (servicesData) {
-                setServices(servicesData)
-            }
-
-            // Fetch reviews
-            const { data: reviewsData } = await supabase
-                .from('reviews')
-                .select(`
-          *,
-          from_user:users!from_user_id (*)
-        `)
-                .eq('to_user_id', id)
-                .order('created_at', { ascending: false })
-
-            if (reviewsData) {
-                setReviews(reviewsData)
-                if (reviewsData.length > 0) {
-                    const avg = reviewsData.reduce((sum, r) => sum + r.rating, 0) / reviewsData.length
+                if (data.reviews.length > 0) {
+                    const avg = data.reviews.reduce((sum, r) => sum + r.rating, 0) / data.reviews.length
                     setAverageRating(avg)
                 }
             }
+        } catch (error) {
+            console.error(error)
         }
 
         setLoading(false)
@@ -100,7 +78,9 @@ export default function ProfilePage({ params }: PageProps) {
 
         if (!selectedService || !selectedDate || !selectedTime) return
 
-        // Create order
+        // TODO: Implement booking via Server Action
+        console.log('Booking feature migrating to Neon...')
+        /*
         const { data: order, error } = await supabase
             .from('orders')
             .insert({
@@ -118,6 +98,7 @@ export default function ProfilePage({ params }: PageProps) {
         if (!error && order) {
             router.push(`/chat/${order.id}`)
         }
+        */
     }
 
     // Generate time slots

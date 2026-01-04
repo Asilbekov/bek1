@@ -19,7 +19,7 @@ const icon = L.icon({
 })
 
 interface MapProps {
-    providers?: (User & { averageRating?: number })[]
+    providers?: (Partial<User> & { averageRating?: number })[]
     center?: [number, number]
     zoom?: number
     onLocationSelect?: (lat: number, lng: number) => void
